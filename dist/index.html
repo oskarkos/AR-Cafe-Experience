@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+    }
+    #container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    #control {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+  </style>
+
+  <body>
+    <div id="container">
+      <a-scene
+        mindar-image="imageTargetSrc: assets/signos-marker.mind; filterMinCF:0.1; filterBeta: 10"
+        color-space="sRGB"
+        embedded
+        renderer="colorManagement: true, physicallyCorrectLights"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+      >
+        <a-assets>
+          <a-asset-item
+            id="italy"
+            src="assets/LAYOUT_ITALIA.gltf"
+          ></a-asset-item>
+        </a-assets>
+
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-gltf-model
+            rotation="90 0 0 "
+            position="0 0 0"
+            scale="2 2 2"
+            src="#italy"
+            animation-mixer="duration: 10; clip: *; clampWhenFinished: true;"
+          ></a-gltf-model>
+        </a-entity>
+      </a-scene>
+    </div>
+  </body>
+</html>
